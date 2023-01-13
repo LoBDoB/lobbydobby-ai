@@ -1,2 +1,2 @@
-# lobbydobby-ai
+# Recommender System
 추천 시스템
