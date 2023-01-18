@@ -98,6 +98,7 @@ def newUser(new_uid, new_vec, new_temp=[]):
         new_temp.append((idx, similarity))
     new_temp.sort(key=lambda x: x[1], reverse=True)
     matrix[new_uid] = new_vec
+
     print(new_temp[:10])
     return preprocessingSimilarity(new_uid, new_temp)
 
@@ -109,6 +110,7 @@ def existUser(user_uid, exist_temp=[]):
             similarity = cosineSimillarity(vec, matrix[user_uid])
             exist_temp.append((idx, similarity))
     exist_temp.sort(key=lambda x: x[1], reverse=True)
+
     print(exist_temp[:10])
     return preprocessingSimilarity(user_uid, exist_temp)
 
