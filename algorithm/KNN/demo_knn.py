@@ -45,13 +45,9 @@ def recommenderLecture(target_uid, lecture, recommender={'prio':[], 'mid':[], 'm
         for idx, lec in enumerate(lect):
             if target_lecture[idx]==0 and lec==10:
                 recommender['prio'].append(idx)
-            elif target_lecture[idx]==0 and lec==5:
+            elif target_lecture[idx]==0 and (lec==5 or lec==4 or lec==3):
                 recommender['mid'].append(idx)
-            elif target_lecture[idx]==0 and lec==4:
-                recommender['mid'].append(idx)
-            elif target_lecture[idx]==0 and lec==3:
-                recommender['mid'].append(idx)
-            elif lec>=3 and target_lecture[idx]<lec:
+            elif lec>=2 and target_lecture[idx]<lec:
                 recommender['mino'].append(idx)
             elif target_lecture[idx] < lec:
                 recommender['else'].append(idx)
@@ -84,7 +80,7 @@ def preprocessingSimilarity(uid, lst, lecture_lst=[]):
         if l[1] >= 0.5:
             cnt += 1
             user_uid = l[0]
-            lecture_lst.append(matrix[user_uid][6:])
+            lecture_lst.append(matrix[user_uid][:12])
             if cnt == 2:
                 return recommenderLecture(uid, lecture_lst)
         else:
