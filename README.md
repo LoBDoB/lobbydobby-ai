@@ -1,2 +1,2 @@
 # Recommender System
-추천 시스템
+강좌 추천 시스템
