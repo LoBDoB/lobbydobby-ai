@@ -54,8 +54,8 @@ class lectureKNN(DataPreprocessing):
                     if i not in result:
                         result.append(self.lectures[i])
                         cnt += 1
-                    if cnt == 3:
-                        return result
+                        if cnt == 3:
+                            return result
             except:
                 continue
 
@@ -75,6 +75,26 @@ class lectureKNN(DataPreprocessing):
                 return self.recommenderLecture(uid, lecture_lst)
 
 
+    def printClass(self, user_lst):
+        tmp = []
+        for i, t in enumerate(user_lst[-6:]):
+            if t != 0:
+                if i == 0:
+                    tmp.append('공학')
+                elif i == 1:
+                    tmp.append('인문/사회')
+                elif i == 2:
+                    tmp.append('예체능')
+                elif i == 3:
+                    tmp.append('교육')
+                elif i == 4:
+                    tmp.append('자연')
+                elif i == 5:
+                    tmp.append('의약')
+
+        return tmp
+
+
     def newUser(self, new_user):
         new_temp = []
         for k, v in zip(new_user.keys(), new_user.values()):
@@ -85,6 +105,8 @@ class lectureKNN(DataPreprocessing):
         new_temp.sort(key=lambda x: x[1], reverse=True)
         self.matrix[new_uid] = new_vec
         print('\n', new_temp[:3])
+        for i in range(3):
+            print(f'{new_temp[i][0]}', self.printClass(self.matrix[new_temp[i][0]]))
         return self.preprocessingSimilarity(new_uid, new_temp)
 
 
@@ -96,48 +118,6 @@ class lectureKNN(DataPreprocessing):
                 exist_temp.append((idx, similarity))
         exist_temp.sort(key=lambda x: x[1], reverse=True)
         print(exist_temp[:3])
-        tmp1, tmp2, tmp3 = [], [], []
-        for i, t1, t2, t3 in zip([0,1,2,3,4,5], self.matrix[exist_temp[0][0]][-6:], self.matrix[exist_temp[1][0]][-6:], self.matrix[exist_temp[2][0]][-6:]):
-            if t1 != 0:
-                if i == 0:
-                    tmp1.append('공학')
-                elif i == 1:
-                    tmp1.append('인문/사회')
-                elif i == 2:
-                    tmp1.append('예체능')
-                elif i == 3:
-                    tmp1.append('교육')
-                elif i == 4:
-                    tmp1.append('자연')
-                elif i == 5:
-                    tmp1.append('의약')
-            if t2 != 0:
-                if i == 0:
-                    tmp2.append('공학')
-                elif i == 1:
-                    tmp2.append('인문/사회')
-                elif i == 2:
-                    tmp2.append('예체능')
-                elif i == 3:
-                    tmp2.append('교육')
-                elif i == 4:
-                    tmp2.append('자연')
-                elif i == 5:
-                    tmp2.append('의약')
-            if t3 != 0:
-                if i == 0:
-                    tmp3.append('공학')
-                elif i == 1:
-                    tmp3.append('인문/사회')
-                elif i == 2:
-                    tmp3.append('예체능')
-                elif i == 3:
-                    tmp3.append('교육')
-                elif i == 4:
-                    tmp3.append('자연')
-                elif i == 5:
-                    tmp3.append('의약')
-        print(f'{exist_temp[0][0]}', tmp1)
-        print(f'{exist_temp[1][0]}', tmp2)
-        print(f'{exist_temp[2][0]}', tmp3)
+        for i in range(3):
+            print(f'{exist_temp[i][0]}', self.printClass(self.matrix[exist_temp[i][0]]))
         return self.preprocessingSimilarity(user_uid, exist_temp)
