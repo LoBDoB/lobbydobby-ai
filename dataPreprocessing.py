@@ -1,5 +1,4 @@
 import pandas as pd
-from tempUID import tempUid
 from random import randrange
 
 
@@ -18,7 +17,7 @@ for _ in range(100):
     num.append(frontNumber + midNumber + str(backNumber))
 
 
-class DataPreprocessing(tempUid):
+class DataPreprocessing():
     def __init__(self):
         self.data = pd.read_csv('./data/knn_data.csv')
         self.number = num
