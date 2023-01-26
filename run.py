@@ -4,14 +4,19 @@ from dataPreprocessing import DataPreprocessing
 
 temp = DataPreprocessing()
 knn = lectureKNN()
+user = temp.matrix
+users = []
+for u in user:
+    users.append(u)
 
-for i in range(20):
-    tmp = knn.printClass(temp.matrix[f'user{i+1}'])
-    exist_result = knn.existUser(f'user{i+1}')
-    print(f'Target-User => user{i+1}', tmp)
+
+for i in users[:20]:
+    tmp = knn.printClass(temp.matrix[i])
+    exist_result = knn.existUser(i)
+    print(f'Target-User => {i}', tmp)
     print(exist_result, '\n')
 
-new = {'user101':[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 0, 5, 0, 0, 0]}
+new = {'1895068':[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 15, 0, 5, 0, 0, 0]}
 new_result = knn.newUser(new)
-print('New-User => user101', knn.printClass(new['user101']))
+print('New-User => 1895068', knn.printClass(new['1895068']))
 print(new_result)
